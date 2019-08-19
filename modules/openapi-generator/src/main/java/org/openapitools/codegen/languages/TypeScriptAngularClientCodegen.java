@@ -221,7 +221,10 @@ public class TypeScriptAngularClientCodegen extends AbstractTypeScriptClientCode
         }
 
         // Set the typescript version compatible to the Angular version
-        if (ngVersion.atLeast("7.0.0")) {
+        if (ngVersion.atLeast("8.0.0")) {
+            // Angular v8 requires typescript ">=3.4.0 <3.6.0"
+            additionalProperties.put("tsVersion", ">=3.4.0 <3.6.0");
+        } else if (ngVersion.atLeast("7.0.0")) {
             // Angular v7 requires typescript ">=3.1.1 <3.2.0"
             additionalProperties.put("tsVersion", ">=3.1.1 <3.2.0");
         } else if (ngVersion.atLeast("6.0.0")) {
@@ -234,7 +237,9 @@ public class TypeScriptAngularClientCodegen extends AbstractTypeScriptClientCode
         }
 
         // Set the rxJS version compatible to the Angular version
-        if (ngVersion.atLeast("7.0.0")) {
+        if (ngVersion.atLeast("8.0.0")) {
+            additionalProperties.put("rxjsVersion", "6.4.0");
+        } else if (ngVersion.atLeast("7.0.0")) {
             additionalProperties.put("rxjsVersion", "6.3.0");
         } else if (ngVersion.atLeast("6.0.0")) {
             additionalProperties.put("rxjsVersion", "6.1.0");
@@ -280,7 +285,10 @@ public class TypeScriptAngularClientCodegen extends AbstractTypeScriptClientCode
         }
 
         // set zone.js version
-        if (ngVersion.atLeast("5.0.0")) {
+        if (ngVersion.atLeast("8.0.0")) {
+            // compatible versions to Angular 8+
+            additionalProperties.put("zonejsVersion", "0.9.1");
+        } else if (ngVersion.atLeast("5.0.0")) {
             // compatible versions to Angular 5+
             additionalProperties.put("zonejsVersion", "0.8.26");
         } else {
